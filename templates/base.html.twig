@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SymBlog{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{{ path('home') }}">SymBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('article_all') }}">Articles</a>
+            </li>
+
+            {% if app.user %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('article_add') }}">Créer un article</a>
+                </li>
+
+            {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Créer un article</a>
+                </li>
+
+            {% endif %}
+
+        </ul>
+
+
+        <ul class="navbar-nav justify-content-end">
+            {% if not app.user %}
+
+                <li class="nav-item">
+                    <a href="{{ path('security_login') }}" class="nav-link">Connexion</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ path('security_registration') }}" class="nav-link">Inscription</a>
+                </li>
+
+            {% else %}
+
+                <li class="nav-item">
+                    <a href="{{ path('security_logout') }}" class="nav-link">Déconnexion</a>
+                </li>
+
+            {% endif %}
+
+
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    {% block body %}{% endblock %}
+
+
+</div>
+
+<div class="container">
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2020 and behond copyright:
+            <a href="https://ms2i.net" target="_blank"> Noël MAURICE</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+
+</div>
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+{% endblock %}
+
+</body>
+</html>
